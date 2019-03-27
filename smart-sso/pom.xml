@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.smart</groupId>
+		<artifactId>smart</artifactId>
+		<version>1.3.0</version>
+	</parent>
+	<artifactId>smart-sso</artifactId>
+	<packaging>pom</packaging>
+	<name>${project.artifactId}</name>
+	
+	<!-- 日志邮箱参数应用级：不同的应用可能异常通知邮箱不同 -->
+	<properties>
+		<log.mail.host>smtp.exmail.qq.com</log.mail.host>
+		<log.mail.port>465</log.mail.port>
+		<log.mail.username>dev@boluozaixian.com</log.mail.username>
+		<log.mail.password>Boluo2018De</log.mail.password>
+		<log.mail.to>test@boluozaixian.com</log.mail.to>
+	</properties>
+
+	<modules>
+		<module>smart-sso-client</module>
+		<module>smart-sso-demo</module>
+		<module>smart-sso-server</module>
+  </modules>
+</project>
