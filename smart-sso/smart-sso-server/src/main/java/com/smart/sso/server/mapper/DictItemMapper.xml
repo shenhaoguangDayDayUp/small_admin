@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smart.sso.server.dao.DictItemDao">
+
+ 	<resultMap id="BaseResultMap" type="com.smart.sso.server.model.DictItem">
+	    <id column="id" property="id" jdbcType="BIGINT" />
+		<result column="dict_code" property="dictCode" jdbcType="VARCHAR" />
+		<result column="dict_item_code" property="dictItemCode" jdbcType="VARCHAR" />
+		<result column="dict_item_desc" property="dictItemDesc" jdbcType="VARCHAR" />
+		<result column="busi_code" property="busiCode" jdbcType="VARCHAR" />
+		<result column="sort" property="sort" jdbcType="INTEGER" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="reserve" property="reserve" jdbcType="VARCHAR" />
+		<result column="is_enabel" property="isEnabel" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+ 	<sql id="Base_Column_List">
+		id,dict_code,dict_item_code,dict_item_desc,busi_code,sort,remark,reserve,is_enabel,create_time,update_time
+	</sql>
+	
+ 	<sql id="isEnabelEnabel">
+		${@org.boluo.utils.constant.Constant$IsEnabel@ENABEL}
+	</sql>
+	
+ 	<sql id="listWhere">
+		<if test="dictCode!=null and dictCode!=''">
+			AND dict_code=#{dictCode}
+		</if>
+		<if test="dictItemCode!=null and dictItemCode!=''">
+			AND dict_item_code=#{dictItemCode}
+		</if>
+		<if test="dictItemDesc!=null and dictItemDesc!=''">
+			AND dict_item_desc LIKE CONCAT(#{dictItemDesc},'%') 
+		</if>
+		<if test="busiCode!=null and busiCode!=''">
+			AND busi_code=#{busiCode}
+		</if>
+		<if test="isEnabel!=null and isEnabel!=''">
+			AND is_enabel=#{isEnabel}
+		</if>
+		<if test="createTime!=null and createTime!=''">
+			AND create_time=#{createTime}
+		</if>
+		<if test="updateTime!=null and updateTime!=''">
+			AND update_time=#{updateTime}
+		</if>
+	</sql>
+	
+ 	<select id="getByEntity" parameterType="com.smart.sso.server.model.DictItem" resultMap="BaseResultMap">
+    	SELECT 
+    		<include refid="Base_Column_List" />
+   		FROM crm_dict_item
+   		WHERE 1=1
+   		<include refid="listWhere" />
+  	</select>
+ 	
+ 	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    	SELECT 
+    		<include refid="Base_Column_List" />
+   		FROM crm_dict_item
+   		WHERE id =  #{id,jdbcType=INTEGER}
+  	</select>
+
+	<delete id="deleteById" parameterType="list" statementType="PREPARED">
+		DELETE FROM crm_dict_item
+		<choose>
+			<when test="list == null or list.size() == 0">
+				WHERE 1 != 1
+			</when>
+			<when test="list.size() == 1">
+				WHERE `id` = <foreach collection="list" item="id">#{id}</foreach>
+			</when>
+			<otherwise>
+				WHERE `id` in <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+			</otherwise>
+		</choose>
+   	</delete>
+
+	<insert id="insert" parameterType="com.smart.sso.server.model.DictItem">
+    	<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      	SELECT LAST_INSERT_ID()
+    	</selectKey>
+    	INSERT INTO crm_dict_item
+    	<trim prefix="(" suffix=")" suffixOverrides=",">
+      		 <if test="dictCode!=null">
+				dict_code,
+			</if>
+			<if test="dictItemCode!=null">
+				dict_item_code,
+			</if>
+			<if test="dictItemDesc!=null">
+				dict_item_desc,
+			</if>
+			<if test="busiCode!=null">
+				busi_code,
+			</if>
+			<if test="sort!=null">
+				sort,
+			</if>
+			<if test="remark!=null">
+				remark,
+			</if>
+			<if test="reserve!=null">
+				reserve,
+			</if>
+			<if test="isEnabel!=null">
+				is_enabel,
+			</if>
+			<if test="createTime!=null">
+				create_time,
+			</if>
+			<if test="updateTime!=null">
+				update_time,
+			</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides=",">
+		    <if test="dictCode!=null">
+				#{dictCode,jdbcType=VARCHAR},
+			</if>
+			<if test="dictItemCode!=null">
+				#{dictItemCode,jdbcType=VARCHAR},
+			</if>
+			<if test="dictItemDesc!=null">
+				#{dictItemDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="busiCode!=null">
+				#{busiCode,jdbcType=VARCHAR},
+			</if>
+			<if test="sort!=null">
+				#{sort,jdbcType=INTEGER},
+			</if>
+			<if test="remark!=null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="reserve!=null">
+				#{reserve,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnabel!=null">
+				#{isEnabel,jdbcType=INTEGER},
+			</if>
+			<if test="createTime!=null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime!=null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+    	</trim>
+  	</insert>
+  	
+  	<update id="update" parameterType="com.smart.sso.server.model.DictItem">
+    	UPDATE crm_dict_item
+    	<set>
+   			<if test="dictCode!=null">
+				dict_code=#{dictCode,jdbcType=VARCHAR},
+			</if>
+			<if test="dictItemCode!=null">
+				dict_item_code=#{dictItemCode,jdbcType=VARCHAR},
+			</if>
+			<if test="dictItemDesc!=null">
+				dict_item_desc=#{dictItemDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="busiCode!=null">
+				busi_code=#{busiCode,jdbcType=VARCHAR},
+			</if>
+			<if test="sort!=null">
+				sort=#{sort,jdbcType=INTEGER},
+			</if>
+			<if test="remark!=null">
+				remark=#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="reserve!=null">
+				reserve=#{reserve,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnabel!=null">
+				is_enabel=#{isEnabel,jdbcType=INTEGER},
+			</if>
+			<if test="createTime!=null">
+				create_time=#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime!=null">
+				update_time=#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+    	</set>
+    	WHERE id = #{id,jdbcType=INTEGER}
+  	</update>
+
+  	<select id="selectByIdList" parameterType="list" resultMap="BaseResultMap">
+    	SELECT 
+    		<include refid="Base_Column_List" />
+   		FROM crm_dict_item
+   			WHERE `id` in 
+   			<foreach collection="list" item="id" open="(" separator="," close=")">
+   				#{id,jdbcType=INTEGER}
+   			</foreach>
+  	</select>
+  
+  	<select id="findList" resultType="DictItem"> 
+  		SELECT d.dict_item_code,d.dict_item_desc
+		FROM sys_dict_item d
+		WHERE d.dict_code = #{dictCode}
+		<if test="dictItemDesc!=null and dictItemDesc!=''">
+			AND d.dict_item_desc LIKE CONCAT(#{dictItemDesc},'%') 
+		</if>
+		AND d.is_enabel = <include refid="isEnabelEnabel"/>
+		ORDER BY d.sort
+  	</select>
+	
+  	<select id="findListPage" resultType="DictItem"> 
+  		SELECT d.dict_item_code,d.dict_item_desc
+		FROM sys_dict_item d
+		WHERE d.dict_code = #{dictItem.dictCode}
+		<if test="dictItem.dictItemDesc!=null and dictItem.dictItemDesc!=''">
+			AND d.dict_item_desc LIKE CONCAT(#{dictItem.dictItemDesc},'%') 
+		</if>
+		AND d.is_enabel = <include refid="isEnabelEnabel"/>
+		ORDER BY d.sort
+  	</select>
+  
+</mapper>

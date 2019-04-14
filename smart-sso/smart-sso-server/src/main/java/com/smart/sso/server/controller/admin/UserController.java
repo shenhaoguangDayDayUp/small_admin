@@ -2,7 +2,6 @@ package com.smart.sso.server.controller.admin;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +34,6 @@ import com.smart.sso.server.model.User;
 import com.smart.sso.server.model.UserRole;
 import com.smart.sso.server.provider.PasswordProvider;
 import com.smart.sso.server.service.RoleService;
-import com.smart.sso.server.service.SysOptionService;
 import com.smart.sso.server.service.UserRoleService;
 import com.smart.sso.server.service.UserService;
 import com.smart.sso.server.service.UserUserService;
@@ -61,8 +59,6 @@ public class UserController extends BaseController {
 	private UserRoleService userRoleService;
 	@Resource
 	private UserUserService userUserService;
-	@Resource
-	private SysOptionService sysOptionService;
 
 	@ApiOperation("初始页")
 	@RequestMapping(method = RequestMethod.GET)
@@ -329,11 +325,4 @@ public class UserController extends BaseController {
 		return list;
 	}
 
-	// 获取所有来源渠道
-	@ApiOperation("获取所有来源渠道")
-	@RequestMapping(value = "/getOption", method = RequestMethod.GET)
-	public @ResponseBody List<Object> getOption(String optionId, String optionCode, String state) {
-		List<Object> list = sysOptionService.getOption(Integer.valueOf(optionId), optionCode, Integer.valueOf(state));
-		return list;
-	}
 }

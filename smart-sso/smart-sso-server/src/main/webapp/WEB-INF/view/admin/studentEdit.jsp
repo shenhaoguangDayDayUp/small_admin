@@ -275,19 +275,18 @@
 
 	$.ajax({
 		type : 'get',
-		url : "${_path}/admin/user/getOption",
+		url : "${_path}/admin/dictItem/list",
 		contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 		dataType : "json",
 		data : {
-			"optionId" : 10,//模块ID
-			"state" : 0 //状态
+			"dictCode" : 'src_ditch'//渠道来源字典编码
 		},
 		success : function(data) {
 			var tempIdStr = '';
 			$("#field").append(tempIdStr);
 			$.each(data, function(i, item) {
-				var tempId = '<option  value="' + item.option_code + '">'
-						+ item.option_value + '</option>';
+				var tempId = '<option  value="' + item.dictItemCode + '">'
+						+ item.dictItemDesc + '</option>';
 				$("#field").append(tempId);
 				$("#field").on("change", function(a, b, c) {
 					$("#option_code").val($("#field option:selected").val());

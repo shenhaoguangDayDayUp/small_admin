@@ -22,6 +22,15 @@ public class Pagination<T> extends PaginationSupport implements Serializable {
 	public Pagination(int pageNo, int pageSize) {
 		super(pageNo, pageSize);
 	}
+	
+	public void initPagination (Integer pageNo,Integer pageSize) {
+		if(pageNo!=null) {
+			this.setPageNo(pageNo);
+		}
+		if(pageSize!=null) {
+			this.setPageSize(pageSize);
+		}
+	}
 
 	/**
 	 * 获得分页内容

@@ -24,7 +24,6 @@ import com.smart.sso.server.model.User;
 import com.smart.sso.server.model.UserRole;
 import com.smart.sso.server.provider.PasswordProvider;
 import com.smart.sso.server.service.AppService;
-import com.smart.sso.server.service.SysOptionService;
 import com.smart.sso.server.service.UserRoleService;
 import com.smart.sso.server.service.UserService;
 
@@ -169,9 +168,4 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User, Integer> impleme
 		return userCode;
 	}
 
-	@SuppressWarnings("null")
-	public List<Object> getOption(Integer optionId, String optionCode, Integer state) {
-		SysOptionService sysOption = null;
-		return sysOption.getOption(optionId, optionCode, state);
-	}
 }

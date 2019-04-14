@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.smart.mvc.util.StringUtils;
 
 /**
@@ -14,6 +17,8 @@ import com.smart.mvc.util.StringUtils;
  * @author Frank_King
  */
 public class BaseController {
+	
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 
 	private Integer[] getAjaxIds(final String str, final String separator) {
 		Integer[] ids = null;
